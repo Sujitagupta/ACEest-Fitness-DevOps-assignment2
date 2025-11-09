@@ -1,0 +1,1 @@
+Flask>=2.2\ngunicorn\npytest\npytest-flask\ncoverage\nrequests\n
