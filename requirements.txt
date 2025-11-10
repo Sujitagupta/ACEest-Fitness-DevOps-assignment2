@@ -1,1 +1,6 @@
-Flask>=2.2\ngunicorn\npytest\npytest-flask\ncoverage\nrequests\n
+Flask>=2.2
+gunicorn
+pytest
+pytest-flask
+coverage
+requests
