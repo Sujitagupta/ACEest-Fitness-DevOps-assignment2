@@ -53,13 +53,13 @@ pipeline {
             }
         }
 
-	stage('Build and Push Docker') {
+stage('Build and Push Docker') {
     steps {
         script {
             sh '''
-                docker build -t myimage:latest .
-                docker tag myimage:latest mydockerhubuser/myimage:latest
-                docker push mydockerhubuser/myimage:latest
+                /usr/local/bin/docker build -t myimage:latest .
+                /usr/local/bin/docker tag myimage:latest yourdockerhubuser/myimage:latest
+                /usr/local/bin/docker push yourdockerhubuser/myimage:latest
             '''
         }
     }
