@@ -53,19 +53,18 @@ pipeline {
             }
         }
 
-        stage('Build & Push Docker') {
-            steps { 
-                script { 
-                    def tag = "v${env.BUILD_NUMBER}"
-                    docker.withRegistry('', "${DOCKERHUB_CREDENTIALS}") { 
-                        def img = docker.build("${env.DOCKERHUB_REPO}:${tag}", "--build-arg APP_VERSION=${tag} .")
-                        img.push()
-                        img.push('latest')
-                        env.IMAGE_TAG = tag
-                    } 
-                } 
-            }
+	stage('Build and Push Docker') {
+    steps {
+        script {
+            sh '''
+                docker build -t myimage:latest .
+                docker tag myimage:latest mydockerhubuser/myimage:latest
+                docker push mydockerhubuser/myimage:latest
+            '''
         }
+    }
+}
+
 
         stage('Deploy') {
             steps {
