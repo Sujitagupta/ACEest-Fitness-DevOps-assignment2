@@ -25,14 +25,13 @@ pipeline {
     		post { always { junit 'reports/junit.xml' } }
 	}
 
-
-        stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv("${SONARQUBE}") {
-                    sh 'sonar-scanner -Dsonar.projectKey=ACEest-Fitness'
-                }
-            }
-        }
+	stage('SonarQube Analysis') {
+    steps {
+        withSonarQubeEnv('sonarqube') {
+            sh '/opt/homebrew/bin/sonar-scanner -Dsonar.projectKey=ACEest-Fitness'
+        		}
+    		}
+	}
 
         stage('Quality Gate') {
             steps { 
