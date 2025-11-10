@@ -13,16 +13,18 @@ pipeline {
             } 
         }
 
-        stage('Unit Test') {
-            steps { 
-                sh 'pytest -q --junitxml=reports/junit.xml --cov=app --cov-report=xml:reports/coverage.xml' 
-            }
-            post { 
-                always { 
-                    junit 'reports/junit.xml' 
-                } 
-            }
-        }
+	stage('Unit Test') {
+    		steps {
+        		sh '''
+            		/Library/Frameworks/Python.framework/Versions/3.13/bin/pytest -q \
+            		--junitxml=reports/junit.xml \
+            		--cov=app \
+            		--cov-report=xml:reports/coverage.xml
+        		'''
+    		}
+    		post { always { junit 'reports/junit.xml' } }
+	}
+
 
         stage('SonarQube Analysis') {
             steps {
